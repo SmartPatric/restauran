@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.isNull;
-
 @Service
 @AllArgsConstructor
 public class DefaultUsersService implements UsersService {

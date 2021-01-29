@@ -3,46 +3,47 @@
 <head>
     <title>Restaurant</title>
     <meta content="text/html; charset=UTF-8"/>
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 <body>
-    <h1 th:text="#{restaurant}"></h1>
-    <div class="navigation">
-        <span>
-            <a href="?lang=en" th:text="#{lang.eng}"></a>
-            <a href="?lang=uk" th:text="#{lang.ukr}"></a>
-        </span>
-        <div class="user_auth">
-            <a href="/reg"><p th:text="#{titleReg}"></p></a>
-            <a href="/log"><p th:text="#{logIn}"></p></a>
-        </div>
+<h1 th:text="#{restaurant}"></h1>
+<div class="navigation">
+    <div class="reg">
+        <a href="/registration"><p th:text="#{titleReg}"></p></a>
+        <a href="/logIn"><p th:text="#{logIn}"></p></a>
     </div>
+    <div class="lang">
+        <a href="?lang=en" th:text="#{lang.eng}"></a>
+        <a href="?lang=uk" th:text="#{lang.ukr}"></a>
+    </div>
+</div>
 
-    <div class="menu">
-        <div class="dish">
-            <img src="d1.png"/>
-            <h3 th:text="#{pizza1.type}"></h3>
-            <p th:text="#{pizza1.price}"></p>
-            <div class="order-btn">
-                <a href="#"><p th:text="#{order}"></p></a>
-            </div>
-        </div>
-        <div class="dish">
-            <img src="d1.png"/>
-            <h3 th:text="#{pizza2.type}"></h3>
-            <p th:text="#{pizza2.price}"></p>
-            <div class="order-btn">
-                <a href="#"><p th:text="#{order}"></p></a>
-            </div>
-        </div>
-        <div class="dish">
-            <img src="d1.png"/>
-            <h3 th:text="#{pizza3.type}"></h3>
-            <p th:text="#{pizza3.price}"></p>
-            <div class="order-btn">
-                <a href="#"><p th:text="#{order}"></p></a>
-            </div>
+<div class="menu">
+    <div class="dish">
+        <img src="d1.png"/>
+        <h3 th:text="#{pizza1.type}"></h3>
+        <p th:text="#{pizza1.price}"></p>
+        <div class="order-btn">
+            <a href="#"><p th:text="#{order}"></p></a>
         </div>
     </div>
+    <div class="dish">
+        <img src="d1.png"/>
+        <h3 th:text="#{pizza2.type}"></h3>
+        <p th:text="#{pizza2.price}"></p>
+        <div class="order-btn">
+            <a href="#"><p th:text="#{order}"></p></a>
+        </div>
+    </div>
+    <div class="dish">
+        <img src="d1.png"/>
+        <h3 th:text="#{pizza3.type}"></h3>
+        <p th:text="#{pizza3.price}"></p>
+        <div class="order-btn">
+            <a href="#"><p th:text="#{order}"></p></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

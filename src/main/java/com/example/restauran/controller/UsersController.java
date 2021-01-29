@@ -32,7 +32,7 @@ public class UsersController {
     }
 
     @GetMapping("/findByLogin")
-    public UsersDTO findByLogin(@RequestParam String email) {
+    public UsersDTO findByEmail(@RequestParam String email) {
         log.info("Handling find by email request: " + email);
         return usersService.findByEmail(email);
     }
