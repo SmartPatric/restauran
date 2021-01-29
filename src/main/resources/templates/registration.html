@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8"/>
+    <title>Login form's Main</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="col-md-8 col-md-offset-2">
+    <h1 th:text="#{titleReg}"></h1>
+</div>
+
+<span class="col-md-4 col-md-offset-2" style="float: left">
+        <a href="?lang=en" th:text="#{lang.eng}"></a>
+        <a href="?lang=uk" th:text="#{lang.ukr}"></a>
+</span>
+
+
+<div class="container" style="margin-top: 60px">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form style="margin-bottom: 30px" name="form" autocomplete="off"
+                  th:action="@{/result}" th:object="${users}" method="post">
+                <label th:text="#{email}" for="email">: </label>
+                <input type="email" placeholder="Email"
+                       required
+                       id= "email"
+                       pattern="^\w+.(gmail|mail).[a-zA-Z]{2, 3}$"
+                       th:field="*{email}"
+                       th:attr="placeholder = #{email.placeholder}"/>
+                <br>
+                <label th:text="#{password}" for="pass">:</label>
+                <input type="password"
+                       id ="pass"
+                       required
+                       pattern="\w{6,45}"
+                       th:field="*{password}"
+                       th:attr="placeholder = #{password.placeholder}"/>
+                <p><input type="submit" th:attr="value = #{submit}"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
