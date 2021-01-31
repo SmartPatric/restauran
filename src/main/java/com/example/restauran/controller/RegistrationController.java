@@ -19,16 +19,8 @@ public class RegistrationController {
     private final UsersConverter usersConverter;
 
     @GetMapping(value = "/registration")
-    public String registrationForm(@RequestParam(value = "error", required = false) String error,
-                                   @RequestParam(value = "exist", required = false) String exist,
-                                   Model model) {
+    public String registrationForm(                                  Model model) {
         model.addAttribute("users", new Users());
-        if (error != null) {
-            model.addAttribute("bad", "Некоректні дані");//в випадку некоректного вводу
-        }
-        if (exist != null) {
-            model.addAttribute("bad", "Мейл зайнято");//в випадку якщо емейл зайнято
-        }
         return "registration";
     }
 

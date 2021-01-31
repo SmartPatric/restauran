@@ -24,6 +24,12 @@
 <div class="form">
     <form name="form" autocomplete="off"
           th:action="@{/userCabinet}" th:object="${logUsers}" method="post">
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.exist}">
+            Email exists
+        </div>
         <label th:text="#{email}" for="email"></label><br>
         <input type="email"
                required
