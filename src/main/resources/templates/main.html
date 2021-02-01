@@ -20,26 +20,10 @@
 </div>
 
 <div class="menu">
-    <div class="dish">
-        <img src="d1.png"/>
-        <h3 th:text="#{pizza1.type}"></h3>
-        <p th:text="#{pizza1.price}"></p>
-        <div class="order-btn">
-            <a href="#"><p th:text="#{order}"></p></a>
-        </div>
-    </div>
-    <div class="dish">
-        <img src="d1.png"/>
-        <h3 th:text="#{pizza2.type}"></h3>
-        <p th:text="#{pizza2.price}"></p>
-        <div class="order-btn">
-            <a href="#"><p th:text="#{order}"></p></a>
-        </div>
-    </div>
-    <div class="dish">
-        <img src="d1.png"/>
-        <h3 th:text="#{pizza3.type}"></h3>
-        <p th:text="#{pizza3.price}"></p>
+    <div th:each="dish: ${dishes}" class="dish">
+        <img th:attr="src=${dish.image}"/>
+        <h3 th:text="${dish.name}"></h3>
+        <p th:text="${dish.price}"></p>
         <div class="order-btn">
             <a href="#"><p th:text="#{order}"></p></a>
         </div>

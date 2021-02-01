@@ -1,6 +1,8 @@
 package com.example.restauran.service;
 
+import com.example.restauran.converters.UsersConverter;
 import com.example.restauran.dto.UsersDTO;
+import com.example.restauran.entity.Role;
 import com.example.restauran.entity.Users;
 import com.example.restauran.repository.UsersRepository;
 import com.example.restauran.error.ValidationException;
@@ -66,4 +68,25 @@ public class DefaultUsersService implements UsersService {
                 .map(usersConverter::fromUserToUserDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void updateUserRole(Users user, Role role) throws ValidationException {
+
+    }
+
+    @Override
+    public void updateUserEmail(Users user, String email) throws ValidationException {
+
+    }
+
+    @Override
+    public void updateUserPassport(Users user, String password) throws ValidationException {
+
+    }
+
+    @Override
+    public void updateUserActive(Users user, Boolean active) throws ValidationException {
+
+    }
+
 }

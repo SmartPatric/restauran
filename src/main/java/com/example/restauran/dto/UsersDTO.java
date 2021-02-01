@@ -1,17 +1,13 @@
 package com.example.restauran.dto;
 
 import com.example.restauran.entity.Role;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 
 @Data
 @Builder
@@ -31,7 +27,6 @@ public class UsersDTO {
     private String password;
 
     private Role role;
-
-    private boolean active = true;
+    private Boolean active = true;
 
 }

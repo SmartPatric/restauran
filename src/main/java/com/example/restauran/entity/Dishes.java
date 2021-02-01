@@ -27,8 +27,8 @@ public class Dishes {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
     private Category category;
 
 }

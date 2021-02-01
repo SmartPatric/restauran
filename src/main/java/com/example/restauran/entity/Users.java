@@ -22,10 +22,10 @@ public class Users {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Role role;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_USER;
 
     @Column(name = "active")
-    private boolean active = true;
+    private Boolean active = true;
 }

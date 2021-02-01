@@ -1,6 +1,5 @@
 package com.example.restauran.repository;
 
-
 import com.example.restauran.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 

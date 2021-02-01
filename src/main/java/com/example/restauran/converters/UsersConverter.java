@@ -1,4 +1,4 @@
-package com.example.restauran.service;
+package com.example.restauran.converters;
 import com.example.restauran.dto.UsersDTO;
 import com.example.restauran.entity.Users;
 import org.springframework.stereotype.Component;
@@ -12,6 +12,7 @@ public class UsersConverter {
         users.setEmail(usersDto.getEmail());
         users.setPassword(usersDto.getPassword());
         users.setRole(usersDto.getRole());
+        users.setActive(usersDto.getActive());
         return users;
     }
 
@@ -20,6 +21,7 @@ public class UsersConverter {
                 .id(users.getId())
                 .email(users.getEmail())
                 .password(users.getPassword())
+                .active(users.getActive())
                 .role(users.getRole())
                 .build();
     }

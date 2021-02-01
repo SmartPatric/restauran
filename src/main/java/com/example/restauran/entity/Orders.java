@@ -21,12 +21,12 @@ public class Orders {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Status status;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.APPROVING;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;
 
     @Column(name = "creation_date", nullable = false)
