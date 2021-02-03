@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -22,9 +25,8 @@ public class Users {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_USER;
+    @Column(name = "role", nullable = false)
+    private String  role = Role.USER.toString();
 
     @Column(name = "active")
     private Boolean active = true;

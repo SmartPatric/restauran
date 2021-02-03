@@ -1,10 +1,10 @@
 package com.example.restauran.dto;
 
-import com.example.restauran.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -18,7 +18,7 @@ public class UsersDTO {
     private Integer id;
 
     @Email
-    @Size(min = 9, max = 45, message = "Length 9-45")
+    @Size(min = 6, max = 45, message = "Length 6-45")
     @NotBlank(message = "Enter email")
     private String email;
 
@@ -26,7 +26,7 @@ public class UsersDTO {
     @NotBlank(message = "Enter password")
     private String password;
 
-    private Role role;
-    private Boolean active = true;
+    private String role;
+    private Boolean active;
 
 }

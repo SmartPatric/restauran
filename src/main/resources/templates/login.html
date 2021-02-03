@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta content="text/html; charset=UTF-8"/>
@@ -23,26 +22,25 @@
 
 <div class="form">
     <form name="form" autocomplete="off"
-          th:action="@{/userCabinet}" th:object="${logUsers}" method="post">
+          th:action="@{/login}" method="post">
         <div th:if="${param.error}">
             Invalid username and password.
         </div>
-        <div th:if="${param.exist}">
-            Email exists
+        <div th:if="${param.logout}">
+            You have been logged out.
         </div>
         <label th:text="#{email}" for="email"></label><br>
-        <input type="email"
+        <input type="text"
                required
+               name="email"
                id="email"
-               th:field="*{email}"
                th:attr="placeholder = #{email.placeholder}"/>
         <br>
-        <label th:text="#{password}" for="pass"></label><br>
+        <label th:text="#{password}" for="password"></label><br>
         <input type="password"
-               id="pass"
+               id="password"
+               name="password"
                required
-               pattern="[a-zA-Zа-яА-Я_\d]{6,45}"
-               th:field="*{password}"
                th:attr="placeholder = #{password.placeholder}"/>
         <input class="sbm-btn" type="submit" th:attr="value = #{submit}"/>
     </form>

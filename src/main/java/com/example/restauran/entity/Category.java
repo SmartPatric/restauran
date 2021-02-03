@@ -3,7 +3,7 @@ package com.example.restauran.entity;
 
 public enum Category{
     PIZZA,
-    DESERT,
+    DESSERT,
     DRINK,
     SALAD
 }

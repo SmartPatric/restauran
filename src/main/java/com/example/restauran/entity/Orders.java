@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -30,10 +30,10 @@ public class Orders {
     private Users user;
 
     @Column(name = "creation_date", nullable = false)
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     @Column(name = "update_date", nullable = false)
-    private Date updateDate;
+    private LocalDateTime updateDate;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "orders_dishes",

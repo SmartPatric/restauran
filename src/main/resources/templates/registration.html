@@ -20,13 +20,11 @@
 
 <div class="form">
     <form name="form" autocomplete="off"
-          th:action="@{/result}" th:object="${users}" method="post">
+          th:action="@{/registration}" th:object="${users}" method="post">
         <div th:if="${param.error}">
             Invalid username and password.
         </div>
-        <div th:if="${param.exist}">
-            Email exists
-        </div>
+        <div th:text="${message}"></div>
         <label th:text="#{email}" for="email"></label><br>
         <input type="email"
                required

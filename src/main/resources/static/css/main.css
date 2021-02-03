@@ -8,7 +8,7 @@ h1{
 }
 
 .dish{
-    padding: 50px;
+    padding: 50px 50px 0px;
     background-size: cover;
 
     width: inherit;
@@ -71,4 +71,18 @@ img {
 .reg *{
     margin: 0px 15px;
 }
+
+.paging{
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.paging *{
+    padding: 0px 2%;
+    margin: 0;
+}
+
+
 

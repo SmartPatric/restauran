@@ -6,6 +6,9 @@ import com.example.restauran.entity.Dishes;
 import com.example.restauran.error.ValidationException;
 import com.example.restauran.repository.DishRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +25,6 @@ public class DefaultDishService implements DishService{
 
     @Override
     public DishDTO saveDish(DishDTO dishDTO) throws ValidationException {
-        //validateUserDto(usersDto);
         Dishes savedDish = dishRepository.save(dishConverter.fromDishDtoToDish(dishDTO));
         return dishConverter.fromDishToDishDto(savedDish);
     }
@@ -44,6 +46,12 @@ public class DefaultDishService implements DishService{
                 .stream()
                 .map(dishConverter::fromDishToDishDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<Dishes> findPaginated(int pageNum, int pageSize) {
+        Pageable page = PageRequest.of(pageNum-1, pageSize);
+        return dishRepository.findAll(page);
     }
 
     @Override

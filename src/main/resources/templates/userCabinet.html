@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>User Cabinet</title>
     <meta content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/css/main.css}" rel="stylesheet"/>
+
 </head>
 <body>
-    <span class="col-md-4 col-md-offset-2" style="float: left">
-        <a href="?lang=en" th:text="#{lang.eng}"></a>
-        <a href="?lang=uk" th:text="#{lang.ukr}"></a>
-    </span>
-    <h1 th:text="#{cabinet}"></h1>
-    <h3 th:text="#{welcome}"></h3>
-    <p th:text="${logUsers.getEmail()}"></p>
+<h1 th:text="#{cabinet}"></h1>
+<div class="reg">
+    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+        Logout
+    </a>
+    <a href="/"><p th:text="#{page.main}"></p></a>
+</div>
+<p>Welcome, <span sec:authentication="principal.username"></span></p>
 </body>
 </html>

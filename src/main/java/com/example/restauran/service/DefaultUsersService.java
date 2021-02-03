@@ -4,8 +4,8 @@ import com.example.restauran.converters.UsersConverter;
 import com.example.restauran.dto.UsersDTO;
 import com.example.restauran.entity.Role;
 import com.example.restauran.entity.Users;
-import com.example.restauran.repository.UsersRepository;
 import com.example.restauran.error.ValidationException;
+import com.example.restauran.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,6 @@ public class DefaultUsersService implements UsersService {
 
     private final UsersRepository usersRepository;
     private final UsersConverter usersConverter;
-
 
     @Override
     public UsersDTO saveUser(UsersDTO usersDto) throws ValidationException {
