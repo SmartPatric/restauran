@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class DefaultOrderService implements OrderService{
+public class DefaultOrderService implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrdersConverter ordersConverter;
@@ -35,6 +35,18 @@ public class DefaultOrderService implements OrderService{
     public Orders findById(Integer dishId) {
         Optional<Orders> order = orderRepository.findById(dishId);
         return order.orElse(null);
+    }
+
+    @Override
+    public Orders findOrdersByUserId(Integer userId){
+        List<Orders> orders = orderRepository.findByUserId(userId);
+        for (Orders order : orders) {
+            if(!order.getStatus().equals(Status.CANCELED.toString()) &&
+                    !order.getStatus().equals(Status.CLOSED.toString())){
+                return order;
+            }
+        }
+        return null;
     }
 
     @Override

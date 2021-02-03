@@ -1,5 +1,6 @@
 package com.example.restauran.controller;
 
+import com.example.restauran.converters.UsersConverter;
 import com.example.restauran.entity.Dishes;
 import com.example.restauran.service.DishService;
 import com.example.restauran.service.OrderService;
@@ -22,8 +23,9 @@ import java.util.List;
 public class MainController {
 
     private final DishService dishService;
-    private final UsersService usersService;
     private final OrderService orderService;
+    private final UsersService usersService;
+    private final UsersConverter usersConverter;
 
 
     @GetMapping(value = "/")
@@ -46,7 +48,7 @@ public class MainController {
 
     @GetMapping(value = "/task")
     public String taskList(ModelMap model) {
-        model.put("users", orderService.findAll());
+        model.put("users", usersService.findAll());
         return "task";
     }
 }

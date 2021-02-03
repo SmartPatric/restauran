@@ -19,8 +19,6 @@ public class OrderDTO {
 
     private Integer id;
 
-    private Double price;
-
     private Status status;
     private Users user;
 

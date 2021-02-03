@@ -41,6 +41,11 @@ public class DefaultDishService implements DishService{
     }
 
     @Override
+    public Dishes findDishById(Integer id) {
+        return dishRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<DishDTO> findAll() {
         return dishRepository.findAll()
                 .stream()

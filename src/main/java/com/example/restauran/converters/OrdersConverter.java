@@ -11,7 +11,6 @@ public class OrdersConverter {
     public Orders fromOrderDtoToOrder(OrderDTO orderDTO) {
         Orders order = new Orders();
         order.setId(orderDTO.getId());
-        order.setPrice(orderDTO.getPrice());
         order.setCreationDate(orderDTO.getCreationDate());
         order.setUpdateDate(orderDTO.getUpdateDate());
         order.setStatus(orderDTO.getStatus());
@@ -23,7 +22,6 @@ public class OrdersConverter {
     public OrderDTO fromOrderToOrderDto(Orders order) {
         return OrderDTO.builder()
                 .id(order.getId())
-                .price(order.getPrice())
                 .creationDate(order.getCreationDate())
                 .updateDate(order.getUpdateDate())
                 .status(order.getStatus())

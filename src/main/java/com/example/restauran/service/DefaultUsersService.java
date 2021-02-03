@@ -2,7 +2,6 @@ package com.example.restauran.service;
 
 import com.example.restauran.converters.UsersConverter;
 import com.example.restauran.dto.UsersDTO;
-import com.example.restauran.entity.Role;
 import com.example.restauran.entity.Users;
 import com.example.restauran.error.ValidationException;
 import com.example.restauran.repository.UsersRepository;
@@ -53,11 +52,7 @@ public class DefaultUsersService implements UsersService {
 
     @Override
     public UsersDTO findByEmail(String email) {
-        Users users = usersRepository.findByEmail(email);
-        if (users != null) {
-            return usersConverter.fromUserToUserDto(users);
-        }
-        return null;
+        return usersConverter.fromUserToUserDto(usersRepository.findByEmail(email));
     }
 
     @Override
@@ -68,24 +63,5 @@ public class DefaultUsersService implements UsersService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void updateUserRole(Users user, Role role) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserEmail(Users user, String email) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserPassport(Users user, String password) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserActive(Users user, Boolean active) throws ValidationException {
-
-    }
 
 }
