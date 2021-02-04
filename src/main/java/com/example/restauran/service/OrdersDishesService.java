@@ -9,4 +9,6 @@ public interface OrdersDishesService {
     List<OrdersDishes> findOrderDishesByOrder_id(Integer orderId);
 
     List<OrdersDishes> findAllDishes();
+
+    OrdersDishes saveNewOrderDish(OrdersDishes ordersDishes);
 }

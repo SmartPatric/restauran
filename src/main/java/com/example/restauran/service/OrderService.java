@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderDTO saveOrder(OrderDTO orderDTO) throws ValidationException;
+    Orders saveOrder(Orders orderDTO);
 
     void deleteOrder(Integer dishId);
 

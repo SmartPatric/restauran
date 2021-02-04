@@ -4,6 +4,7 @@ import com.example.restauran.converters.OrdersConverter;
 import com.example.restauran.dto.OrderDTO;
 import com.example.restauran.entity.Orders;
 import com.example.restauran.entity.Status;
+import com.example.restauran.entity.Users;
 import com.example.restauran.error.ValidationException;
 import com.example.restauran.repository.OrderRepository;
 import lombok.AllArgsConstructor;
@@ -22,8 +23,9 @@ public class DefaultOrderService implements OrderService {
     private final OrdersConverter ordersConverter;
 
     @Override
-    public OrderDTO saveOrder(OrderDTO orderDTO) throws ValidationException {
-        return null;
+    public Orders saveOrder(Orders order){
+        Orders savedOrder = orderRepository.save(order);
+        return savedOrder;
     }
 
     @Override

@@ -8,7 +8,8 @@
 
 <h4>${title}</h4>
 
-<div data-wow-delay="0.2s">
+<p th:text="${user}"></p>
+<!--<div data-wow-delay="0.2s">
     <table>
         <thead>
         <tr>
@@ -18,14 +19,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user: ${users}">
             <td th:text="${user.id}"/>
             <td th:text="${user.email}"/>
             <td th:text="${user.password}"/>
-        </tr>
         </tbody>
     </table>
-</div>
+</div>-->
 
 </body>
 </html>

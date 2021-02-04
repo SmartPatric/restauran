@@ -1,7 +1,9 @@
 package com.example.restauran.controller;
 
 import com.example.restauran.converters.UsersConverter;
+import com.example.restauran.dto.UsersDTO;
 import com.example.restauran.entity.Dishes;
+import com.example.restauran.error.ValidationException;
 import com.example.restauran.service.DishService;
 import com.example.restauran.service.OrderService;
 import com.example.restauran.service.UsersService;
@@ -47,8 +49,12 @@ public class MainController {
     }
 
     @GetMapping(value = "/task")
-    public String taskList(ModelMap model) {
-        model.put("users", usersService.findAll());
+    public String taskList(ModelMap model) throws ValidationException {
+        UsersDTO usersDTO = new UsersDTO();
+        usersDTO.setEmail("email@gmail.com");
+        usersDTO.setPassword("123456");
+        usersService.saveUser(usersDTO);
+        model.put("user", usersService.findByEmail("u"));
         return "task";
     }
 }

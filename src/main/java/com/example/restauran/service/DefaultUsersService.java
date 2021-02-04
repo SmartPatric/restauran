@@ -6,6 +6,7 @@ import com.example.restauran.entity.Users;
 import com.example.restauran.error.ValidationException;
 import com.example.restauran.repository.UsersRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
@@ -20,7 +21,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class DefaultUsersService implements UsersService {
 
+    @Autowired
     private final UsersRepository usersRepository;
+    @Autowired
     private final UsersConverter usersConverter;
 
     @Override
