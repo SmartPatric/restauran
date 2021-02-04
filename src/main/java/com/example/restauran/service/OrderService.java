@@ -18,10 +18,8 @@ public interface OrderService {
 
     Orders findById(Integer dishId);
 
-    List<OrderDTO> findAll();
+    Orders findOrdersByUserId(Integer userId);
 
-    void updateOrderPrice(Orders order, Double price) throws ValidationException;
-    void updateOrderStatus(Orders order, Status status) throws ValidationException;
-    void updateUserUpdateDate(Orders order, Date date) throws ValidationException;
+    List<OrderDTO> findAll();
 
 }

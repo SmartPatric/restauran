@@ -68,24 +68,4 @@ public class DefaultUsersService implements UsersService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void updateUserRole(Users user, Role role) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserEmail(Users user, String email) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserPassport(Users user, String password) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserActive(Users user, Boolean active) throws ValidationException {
-
-    }
-
 }

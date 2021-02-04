@@ -37,6 +37,20 @@ public class DefaultOrderService implements OrderService{
         return order.orElse(null);
     }
 
+
+    @Override
+    public Orders findOrdersByUserId(Integer userId){
+        List<Orders> orders = orderRepository.findByUserId(userId);
+        for (Orders order : orders) {
+            if(!order.getStatus().equals(Status.CANCELED.toString()) &&
+                    !order.getStatus().equals(Status.CLOSED.toString())){
+                return order;
+            }
+        }
+        return null;
+    }
+
+
     @Override
     public List<OrderDTO> findAll() {
         return orderRepository.findAll()
@@ -45,19 +59,5 @@ public class DefaultOrderService implements OrderService{
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void updateOrderPrice(Orders order, Double price) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateOrderStatus(Orders order, Status status) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserUpdateDate(Orders order, Date date) throws ValidationException {
-
-    }
 
 }

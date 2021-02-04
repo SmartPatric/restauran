@@ -17,11 +17,8 @@ public interface DishService {
 
     List<DishDTO> findAll();
 
-    Page<Dishes> findPaginated(int pageNum, int pageSize);
+    Dishes findDishById(Integer id);
 
-    void updateUserUpdateName(Dishes dish, String name) throws ValidationException;
-    void updateUserUpdateDescription(Dishes dish, String description) throws ValidationException;
-    void updateUserUpdatePrice(Dishes dish, Double price) throws ValidationException;
-    void updateUserUpdateImage(Dishes dish, String image) throws ValidationException;
+    Page<Dishes> findPaginated(int pageNum, int pageSize);
 
 }

@@ -41,6 +41,11 @@ public class DefaultDishService implements DishService{
     }
 
     @Override
+    public Dishes findDishById(Integer id) {
+        return dishRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<DishDTO> findAll() {
         return dishRepository.findAll()
                 .stream()
@@ -52,26 +57,6 @@ public class DefaultDishService implements DishService{
     public Page<Dishes> findPaginated(int pageNum, int pageSize) {
         Pageable page = PageRequest.of(pageNum-1, pageSize);
         return dishRepository.findAll(page);
-    }
-
-    @Override
-    public void updateUserUpdateName(Dishes dish, String name) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserUpdateDescription(Dishes dish, String description) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserUpdatePrice(Dishes dish, Double price) throws ValidationException {
-
-    }
-
-    @Override
-    public void updateUserUpdateImage(Dishes dish, String image) throws ValidationException {
-
     }
 
 }
