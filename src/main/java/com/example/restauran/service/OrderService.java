@@ -2,7 +2,9 @@ package com.example.restauran.service;
 
 import com.example.restauran.dto.OrderDTO;
 import com.example.restauran.entity.Orders;
+import com.example.restauran.entity.Role;
 import com.example.restauran.entity.Status;
+import com.example.restauran.entity.Users;
 import com.example.restauran.error.ValidationException;
 
 import java.util.Date;
@@ -15,8 +17,6 @@ public interface OrderService {
     void deleteOrder(Integer dishId);
 
     Orders findById(Integer dishId);
-
-    Orders findOrdersByUserId(Integer userId);
 
     List<OrderDTO> findAll();
 

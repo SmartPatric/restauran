@@ -13,11 +13,17 @@
 <h1 th:text="#{restaurant}"></h1>
 <div class="navigation">
     <div class="reg">
-        <a sec:authorize="!isAuthenticated()" href="/registration"><p th:text="#{titleReg}"></p></a>
+        <a sec:authorize="!isAuthenticated()" href="/registration" ><p th:text="#{titleReg}"></p></a>
         <a sec:authorize="!isAuthenticated()" href="/login"><p th:text="#{logIn}"></p></a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{logout}"></a>
-        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminPage}" th:text="#{page.admin}"></a>
-        <a sec:authorize="hasAuthority('USER')" th:href="@{/userCabinet}" th:text="#{cabinet}"></a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+            Logout
+        </a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminPage}">
+            Admin Page
+        </a>
+        <a sec:authorize="hasAuthority('USER')" th:href="@{/userCabinet}">
+            Cabinet
+        </a>
     </div>
     <div class="lang">
         <a href="?lang=en" th:text="#{lang.eng}"></a>
@@ -31,27 +37,24 @@
         <h3 th:text="${dish.name}"></h3>
         <p th:text="${dish.price}"></p>
         <div class="order-btn">
-            <a sec:authorize="hasAuthority('USER')" th:href="@{/userCabinet/{dishId}(dishId=${dish.id})}">
-                <p th:text="#{order}"></p>
-            </a>
-            <a sec:authorize="!hasAuthority('USER')" href="/login"><p th:text="#{order}"></p></a>
+            <a href="/userCabinet"><p th:text="#{order}"></p></a>
         </div>
     </div>
 </div>
 
 <div th:if="${totalPages}>1" class="paging">
-    <p class="paging_title" th:text="#{page.total}+' '+${totalPages}+' :'"></p>
+    <p class="paging_title" th:text="#{page.total}+' '+${totalPages}+' :'"> </p>
     <span th:each="i: ${#numbers.sequence(1, totalPages)}" class="page">
         <a th:if="${currentPage != i}" th:href="@{'/page/'+${i}}"> [[${i}]] </a>
         <span th:unless="${currentPage != i}"> [[${i}]] </span>
     </span>
     <span class="page">
-        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${currentPage+1}}" th:text="#{page.next}"></a>
-        <span th:unless="${currentPage < totalPages}" th:text="#{page.next}"></span>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${currentPage+1}}">Next</a>
+        <span th:unless="${currentPage < totalPages}"> Next </span>
     </span>
     <span class="page">
-        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${totalPages}}" th:text="#{page.last}"></a>
-        <span th:unless="${currentPage < totalPages}" th:text="#{page.last}"></span>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${totalPages}}">Last</a>
+        <span th:unless="${currentPage < totalPages}"> Last </span>
     </span>
 </div>
 </body>

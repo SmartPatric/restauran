@@ -18,6 +18,9 @@ public class Orders {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "price", nullable = false)
+    private Double price;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status = Status.APPROVING;

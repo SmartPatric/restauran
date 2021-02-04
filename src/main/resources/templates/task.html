@@ -12,16 +12,24 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>email</th>
-            <th>password</th>
+            <th>Order ID</th>
+            <th>Order Price</th>
+            <th>Order Status</th>
+            <th>Order User_id</th>
+            <th>Order Creation_date</th>
+            <th>Order Update_date</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user: ${users}">
             <td th:text="${user.id}"/>
-            <td th:text="${user.email}"/>
-            <td th:text="${user.password}"/>
+            <td th:text="${user.price}"/>
+            <td th:text="${user.status}"/>
+            <td th:text="${user.user}"/>
+            <td th:text="${user.creationDate}"/>
+            <td th:text="${user.updateDate}"/>
+            <td th:text="${user.dishes}"/>
+
         </tr>
         </tbody>
     </table>

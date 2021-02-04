@@ -17,4 +17,9 @@ public interface UsersService {
 
     List<UsersDTO> findAll();
 
+    void updateUserRole(Users user, Role role) throws ValidationException;
+    void updateUserEmail(Users user, String email) throws ValidationException;
+    void updateUserPassport(Users user, String password) throws ValidationException;
+    void updateUserActive(Users user, Boolean active) throws ValidationException;
+
 }

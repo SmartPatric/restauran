@@ -15,8 +15,6 @@ public interface DishService {
 
     DishDTO findByName(String name);
 
-    Dishes findDishById(Integer id);
-
     List<DishDTO> findAll();
 
     Page<Dishes> findPaginated(int pageNum, int pageSize);

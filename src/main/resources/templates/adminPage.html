@@ -4,58 +4,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
-    <link href="../static/css/style.css" th:href="@{/css/main.css}" rel="stylesheet"/>
-    <link href="../static/css/style.css" th:href="@{/css/admin.css}" rel="stylesheet"/>
-    <title th:text="#{page.admin}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Admin Page</title>
 </head>
 <body>
-<h2>Welcome admin</h2>
-<div class="navigation">
-    <div class="reg">
-        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{logout}"></a>
-        <a href="/"><p th:text="#{page.main}"></p></a>
-    </div>
-    <div class="lang">
-        <a href="?lang=en" th:text="#{lang.eng}"></a>
-        <a href="?lang=uk" th:text="#{lang.ukr}"></a>
-    </div>
-</div>
-<div class="table">
-    <table class="admin_table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Creation</th>
-            <th>Last Update</th>
-            <th>Dishes</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="order: ${orders}">
-            <td th:text="${order.id}"/>
-            <td>
-
-            </td>
-            <td th:text="${order.status}"/>
-            <td th:text="${order.creationDate}"/>
-            <td th:text="${order.updateDate}"/>
-            <td>
-                <p th:each="dish: ${order.dishes}">
-                    <span th:text="${dish.name}"></span>
-                    <span th:each="order_dish: ${orders_dishes}">
-                        <span th:if="${order_dish.order_id == order.id && order_dish.dish_id == dish.id}">
-                            <span th:text="'('+${order_dish.amount}+')'"></span>
-                        </span>
-                    </span>
-                </p>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <p>Welcome admin</p>
+    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+        Logout
+    </a>
 </body>
 </html>
-
