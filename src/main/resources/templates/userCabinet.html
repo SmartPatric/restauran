@@ -23,33 +23,22 @@
     </div>
 </div>
 <p>Welcome, <span th:text="${user}"></span></p>
+<p>Your orders</p>
 
-<div th:if="${orders_dishes!=null && dishes!=null}">
-    <p>Your orders</p>
-    <div class="order">
-    <div th:each="dish: ${dishes}" class="dish-ordered">
-        <div>
-            <img th:src="@{'~/images/'+${dish.image}}" alt="food">
-        </div>
-        <div class="dish-info">
-            <h3 th:text="${dish.name}"></h3><br>
-            <p th:text="${dish.price}"></p><br>
-            <p th:each="order_dish: ${orders_dishes}">
-                <span th:if="${order_dish.dish_id == dish.id}">
-                    <span th:text="'Amount '+${order_dish.amount}"></span>
-                    <span>Total: <span th:text="${dish.price * order_dish.amount}"></span></span>
-                </span>
-            </p>
-        </div>
-    </div>
 
-    <div class="order-btn">
-        <a href="#">Оплатити</a>
-    </div>
+<div class="menu">
+    <div th:each="dish: ${dishes}" class="dish">
+        <img th:src="@{'~/images/'+${dish.image}}">
+        <h3 th:text="${dish.name}"></h3>
+        <p th:text="${dish.price}"></p>
+        <p th:each="order_dish: ${orders_dishes}">
+            <span th:if="order_dish.dish_id == dish.id">
+                <span th:text="'('+${order_dish.amount}+')'"></span>
+            </span>
+        </span>
+        </p>
     </div>
 </div>
-
-
 
 </body>
 </html>

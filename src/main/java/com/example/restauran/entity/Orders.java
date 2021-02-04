@@ -23,13 +23,13 @@ public class Orders {
     private Status status = Status.APPROVING;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;
 
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
 
-    @Column(name = "update_date")
+    @Column(name = "update_date", nullable = false)
     private LocalDateTime updateDate;
 
     @ManyToMany(cascade = CascadeType.ALL)

@@ -32,9 +32,4 @@ public class DefaultOrdersDishesService implements OrdersDishesService {
     public List<OrdersDishes> findAllDishes() {
         return ordersDishesRepository.findAll();
     }
-
-    @Override
-    public OrdersDishes saveNewOrderDish(OrdersDishes ordersDishes) {
-        return ordersDishesRepository.save(ordersDishes);
-    }
 }
