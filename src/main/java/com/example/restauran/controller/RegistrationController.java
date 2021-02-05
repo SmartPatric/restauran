@@ -6,6 +6,8 @@ import com.example.restauran.error.ValidationException;
 import com.example.restauran.converters.UsersConverter;
 import com.example.restauran.service.UsersService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,6 +27,9 @@ public class RegistrationController {
         return "registration";
     }
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping(value = "/registration")
     public String registrationSubmit(@ModelAttribute @Valid Users user, ModelMap model) {
 
@@ -35,16 +40,17 @@ public class RegistrationController {
             return "registration";
         }
 
+        String password = user.getPassword();
+        user.setPassword(passwordEncoder.encode(password));
+
         try {
             usersService.saveUser(usersConverter.fromUserToUserDto(user));
-            //throw  new ValidationException("ex");
-
-        } catch (ValidationException e) {
+        }
+        catch (ValidationException e) {
             model.addAttribute("message", "Not valid");
             return "registration";
         }
         return "redirect:/";
     }
-
 
 }

@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -28,18 +29,27 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String mainPage(Model model){
-        return mainPagePaging(1, model);
+        return mainPagePaging(1,"name","asc", model);
     }
 
 
     @GetMapping(value = "page/{pageNo}")
-    public String mainPagePaging(@PathVariable("pageNo") int pageNo, Model model) {
+    public String mainPagePaging(@PathVariable("pageNo") int pageNo,
+                                 @RequestParam("sortField") String sortField,
+                                 @RequestParam("sortDir") String sortDir,
+                                 Model model) {
         int pageSize = 9;
-        Page<Dishes> dishesPage = dishService.findPaginated(pageNo,pageSize);
+        Page<Dishes> dishesPage = dishService.findPaginated(pageNo,pageSize, sortField, sortDir);
         List<Dishes> dishes = dishesPage.getContent();
+
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", dishesPage.getTotalPages());
         model.addAttribute("totalItems", dishesPage.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
         model.addAttribute("dishes", dishes);
         return "main";
     }

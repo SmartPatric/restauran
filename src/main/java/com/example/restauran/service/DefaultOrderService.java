@@ -39,8 +39,8 @@ public class DefaultOrderService implements OrderService{
     public Orders findOrdersByUserId(Integer userId){
         List<Orders> orders = orderRepository.findByUserId(userId);
         for (Orders order : orders) {
-            if(!order.getStatus().equals(Status.CANCELED.toString()) &&
-                    !order.getStatus().equals(Status.CLOSED.toString())){
+            if(!order.getStatus().equals(Status.CANCELED) &&
+                    !order.getStatus().equals(Status.CLOSED)){
                 return order;
             }
         }

@@ -16,13 +16,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class AdminPageController {
     /*    TODO
-    Change order status
     Block user by his order
     */
 
@@ -61,6 +61,7 @@ public class AdminPageController {
                 order.setStatus(Status.findStatusById(nextStatus));
             }
         }
+        order.setUpdateDate(LocalDateTime.now());
         orderService.saveOrder(order);
         return "redirect:/adminPage";
     }

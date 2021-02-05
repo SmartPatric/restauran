@@ -65,24 +65,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-   protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+/*   protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user").password(passwordEncoder().encode("123456")).authorities("USER")
                 .and()
                 .withUser("u").password(passwordEncoder().encode("123456")).authorities("USER")
                 .and()
                 .withUser("vvvv@gmail.com").password(passwordEncoder().encode("123456")).authorities("ADMIN");
-    }
+    }*/
 
-/*    @Override
+    @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("SELECT email, password, 'true' as enabled FROM users WHERE email=?")
-                .authoritiesByUsernameQuery("SELECT email, role FROM users WHERE email=?");
-    }*/
+                .usersByUsernameQuery("SELECT email AS username, password, 'true' as enabled FROM users WHERE email=?")
+                .authoritiesByUsernameQuery("SELECT email AS username, role FROM users WHERE email=?");
+    }
 
 
 /*    @Autowired

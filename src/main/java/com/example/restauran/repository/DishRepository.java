@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DishRepository extends JpaRepository<Dishes, Integer> {
 
-    Dishes findByCategory(String cathegory);
+    Dishes findByCategory(String category);
 
 }

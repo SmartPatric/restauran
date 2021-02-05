@@ -19,6 +19,6 @@ public interface DishService {
 
     Dishes findDishById(Integer id);
 
-    Page<Dishes> findPaginated(int pageNum, int pageSize);
+    Page<Dishes> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection);
 
 }

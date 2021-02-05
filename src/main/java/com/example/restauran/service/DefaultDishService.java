@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,8 +55,10 @@ public class DefaultDishService implements DishService{
     }
 
     @Override
-    public Page<Dishes> findPaginated(int pageNum, int pageSize) {
-        Pageable page = PageRequest.of(pageNum-1, pageSize);
+    public Page<Dishes> findPaginated(int pageNum, int pageSize,  String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+        Pageable page = PageRequest.of(pageNum-1, pageSize, sort);
         return dishRepository.findAll(page);
     }
 

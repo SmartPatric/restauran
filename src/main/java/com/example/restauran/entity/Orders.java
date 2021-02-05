@@ -26,10 +26,10 @@ public class Orders {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;
 
-    @Column(name = "creation_date", nullable = false)
+    @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @Column(name = "update_date", nullable = false)
+    @Column(name = "update_date")
     private LocalDateTime updateDate;
 
     @ManyToMany(cascade = CascadeType.ALL)

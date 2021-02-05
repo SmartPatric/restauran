@@ -25,6 +25,13 @@
     </div>
 </div>
 
+<div class="sort">
+    <p>Sort:
+    <a th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}}">by price</a>
+    <a th:href="@{'/page/'+${currentPage}+ '?sortField=name&sortDir='+${reverseSortDir}}">by name </a>
+    </p>
+</div>
+
 <div class="menu">
     <div th:each="dish: ${dishes}" class="dish">
         <img th:src="@{'~/images/'+${dish.image}}">
@@ -42,15 +49,15 @@
 <div th:if="${totalPages}>1" class="paging">
     <p class="paging_title" th:text="#{page.total}+' '+${totalPages}+' :'"></p>
     <span th:each="i: ${#numbers.sequence(1, totalPages)}" class="page">
-        <a th:if="${currentPage != i}" th:href="@{'/page/'+${i}}"> [[${i}]] </a>
+        <a th:if="${currentPage != i}" th:href="@{'/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"> [[${i}]] </a>
         <span th:unless="${currentPage != i}"> [[${i}]] </span>
     </span>
     <span class="page">
-        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${currentPage+1}}" th:text="#{page.next}"></a>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}" th:text="#{page.next}"></a>
         <span th:unless="${currentPage < totalPages}" th:text="#{page.next}"></span>
     </span>
     <span class="page">
-        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${totalPages}}" th:text="#{page.last}"></a>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${totalPages}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}" th:text="#{page.last}"></a>
         <span th:unless="${currentPage < totalPages}" th:text="#{page.last}"></span>
     </span>
 </div>
