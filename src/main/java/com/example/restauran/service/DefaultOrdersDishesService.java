@@ -21,7 +21,7 @@ public class DefaultOrdersDishesService implements OrdersDishesService {
         List<OrdersDishes> ordersDishesAll = ordersDishesRepository.findAll();
         List<OrdersDishes> ordersDishesList = new ArrayList<>();
         for (OrdersDishes orderDish : ordersDishesAll) {
-            if(orderDish.getOrder_id()==orderId){
+            if (orderDish.getOrder_id() == orderId) {
                 ordersDishesList.add(orderDish);
             }
         }
@@ -29,7 +29,24 @@ public class DefaultOrdersDishesService implements OrdersDishesService {
     }
 
     @Override
+    public OrdersDishes findOrderDishesByOrderAndDishId(Integer orderId, Integer dishId) {
+        List<OrdersDishes> ordersDishesListByOrder = findOrderDishesByOrder_id(orderId);
+        if(ordersDishesListByOrder!=null) {
+            for (OrdersDishes orderdish : ordersDishesListByOrder) {
+                if (orderdish.getDish_id() == dishId) return orderdish;
+            }
+        }
+        return null;
+    }
+
+
+    @Override
     public List<OrdersDishes> findAllDishes() {
         return ordersDishesRepository.findAll();
+    }
+
+    @Override
+    public OrdersDishes saveOrderDish(OrdersDishes ordersDishes) {
+        return ordersDishesRepository.save(ordersDishes);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.restauran.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "orders_dishes")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @IdClass(OrdersDishesPK.class)
 public class OrdersDishes {
 
@@ -21,4 +23,12 @@ public class OrdersDishes {
     @Column(name = "amount")
     private Integer amount = 1;
 
+
+    public void increaseAmount() {
+        this.amount++;
+    }
+
+    public void decreaseAmount() {
+        this.amount--;
+    }
 }

@@ -2,21 +2,16 @@ package com.example.restauran.service;
 
 import com.example.restauran.dto.OrderDTO;
 import com.example.restauran.entity.Orders;
-import com.example.restauran.entity.Role;
-import com.example.restauran.entity.Status;
-import com.example.restauran.entity.Users;
-import com.example.restauran.error.ValidationException;
 
-import java.util.Date;
 import java.util.List;
 
 public interface OrderService {
 
-    OrderDTO saveOrder(OrderDTO orderDTO) throws ValidationException;
+    Orders saveOrder(Orders order);
 
     void deleteOrder(Integer dishId);
 
-    Orders findById(Integer dishId);
+    Orders findById(Integer orderId);
 
     Orders findOrdersByUserId(Integer userId);
 

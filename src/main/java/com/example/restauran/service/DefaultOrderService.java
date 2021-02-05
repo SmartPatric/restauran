@@ -9,9 +9,7 @@ import com.example.restauran.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,8 +20,8 @@ public class DefaultOrderService implements OrderService{
     private final OrdersConverter ordersConverter;
 
     @Override
-    public OrderDTO saveOrder(OrderDTO orderDTO) throws ValidationException {
-        return null;
+    public Orders saveOrder(Orders order){
+        return orderRepository.save(order);
     }
 
     @Override
@@ -32,9 +30,8 @@ public class DefaultOrderService implements OrderService{
     }
 
     @Override
-    public Orders findById(Integer dishId) {
-        Optional<Orders> order = orderRepository.findById(dishId);
-        return order.orElse(null);
+    public Orders findById(Integer orderId) {
+        return orderRepository.findById(orderId).orElse(null);
     }
 
 

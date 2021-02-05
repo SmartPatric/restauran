@@ -28,12 +28,19 @@ public class UserCabinetController {
     private final DishService dishService;
     private final OrderService orderService;
 
+/*    TODO
+    Clean all dishes
+    Clean one dish
+    */
+
+
     @GetMapping(value = "/userCabinet")
-    public String userCabinet (@AuthenticationPrincipal User userAuth, ModelMap model){
+    public String userCabinet(@AuthenticationPrincipal User userAuth, ModelMap model) {
 
-            UsersDTO user = usersService.findByEmail(userAuth.getUsername());
-            Orders order = orderService.findOrdersByUserId(user.getId());
+        UsersDTO user = usersService.findByEmail(userAuth.getUsername());
+        Orders order = orderService.findOrdersByUserId(user.getId());
 
+        if (order != null) {
             List<OrdersDishes> ordersDishes = ordersDishesService.findOrderDishesByOrder_id(order.getId());
 
             List<Dishes> dishes = new ArrayList<>();
@@ -44,18 +51,55 @@ public class UserCabinetController {
                 }
             }
 
-            model.addAttribute("user", userAuth.getUsername());
-            model.addAttribute("orders_dishes", ordersDishes);
             model.addAttribute("dishes", dishes);
-
-            return "userCabinet";
+            model.addAttribute("orders_dishes", ordersDishes);
+        } else {
+            model.addAttribute("dishes", null);
+            model.addAttribute("orders_dishes", null);
         }
 
-        @GetMapping(value = "/userCabinet/{dishId}")
-        public String userCabinetAddOrder (@PathVariable(value = "dishId") Integer dishId,
-                @AuthenticationPrincipal User user,
-                ModelMap model){
-            //model.addAttribute("user", user.getUsername());
-            return "redirect:/userCabinet";
-        }
+        model.addAttribute("user", userAuth.getUsername());
+        return "userCabinet";
     }
+
+    @GetMapping(value = "/userCabinet/{dishId}")
+    public String userCabinetAddOrder(@PathVariable(value = "dishId") Integer dishId,
+                                      @AuthenticationPrincipal User userAuth,
+                                      ModelMap model) {
+        UsersDTO user = usersService.findByEmail(userAuth.getUsername());
+        Orders order = orderService.findOrdersByUserId(user.getId());
+
+        if (order == null) {
+        }
+        OrdersDishes orderDish = new OrdersDishes(order.getId(), dishId, 1);
+        OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
+
+        //if orderDish exists increase it amount by 1
+        if (orderDishesFromExist != null) {
+            orderDish = orderDishesFromExist;
+            orderDish.increaseAmount();
+        }
+
+        ordersDishesService.saveOrderDish(orderDish);
+        return "redirect:/userCabinet";
+    }
+
+    @GetMapping(value = "/userCabinet/{type}/{dishId}")
+    public String userCabinetchangeItem(@PathVariable(value = "type") String type,
+                                        @PathVariable(value = "dishId") Integer dishId,
+                                        @AuthenticationPrincipal User userAuth,
+                                        ModelMap model) {
+        UsersDTO user = usersService.findByEmail(userAuth.getUsername());
+        Orders order = orderService.findOrdersByUserId(user.getId());
+        OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
+        if(type.equals("incItem")){
+            orderDishesFromExist.increaseAmount();
+        }
+        else{
+            if (orderDishesFromExist.getAmount()>0)
+                orderDishesFromExist.decreaseAmount();
+        }
+        ordersDishesService.saveOrderDish(orderDishesFromExist);
+        return "redirect:/userCabinet";
+    }
+}

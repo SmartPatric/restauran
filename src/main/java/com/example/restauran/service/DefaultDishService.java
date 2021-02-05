@@ -37,7 +37,7 @@ public class DefaultDishService implements DishService{
 
     @Override
     public DishDTO findByName(String name) {
-        return dishConverter.fromDishToDishDto(dishRepository.findByName(name));
+        return dishConverter.fromDishToDishDto(dishRepository.findByCategory(name));
     }
 
     @Override

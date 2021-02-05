@@ -40,6 +40,10 @@
                     <span>Total: <span th:text="${dish.price * order_dish.amount}"></span></span>
                 </span>
                 </p>
+                <span class="amount">
+                    <a th:href="@{/userCabinet/incItem/{dishId}(dishId=${dish.id})}"}><p>+</p></a>
+                    <a th:href="@{/userCabinet/decItem/{dishId}(dishId=${dish.id})}"}><p>-</p></a>
+                </span>
             </div>
         </div>
 
@@ -48,7 +52,6 @@
         </div>
     </div>
 </div>
-
 
 
 </body>
