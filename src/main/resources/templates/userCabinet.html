@@ -41,8 +41,8 @@
                 </span>
                 </p>
                 <span class="amount">
-                    <a th:href="@{/userCabinet/incItem/{dishId}(dishId=${dish.id})}"}><p>+</p></a>
-                    <a th:href="@{/userCabinet/decItem/{dishId}(dishId=${dish.id})}"}><p>-</p></a>
+                    <a th:if="${order.status.toString()=='APPROVING'}" th:href="@{/userCabinet/incItem/{dishId}(dishId=${dish.id})}"}><p>+</p></a>
+                    <a Th:if="${order.status.toString()=='APPROVING'}" th:href="@{/userCabinet/decItem/{dishId}(dishId=${dish.id})}"}><p>-</p></a>
                 </span>
             </div>
         </div>

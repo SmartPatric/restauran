@@ -49,4 +49,9 @@ public class DefaultOrdersDishesService implements OrdersDishesService {
     public OrdersDishes saveOrderDish(OrdersDishes ordersDishes) {
         return ordersDishesRepository.save(ordersDishes);
     }
+
+    @Override
+    public void deleteOrderDish(OrdersDishes ordersDishes) {
+        ordersDishesRepository.delete(ordersDishes);
+    }
 }

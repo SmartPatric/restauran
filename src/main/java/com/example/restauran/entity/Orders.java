@@ -22,7 +22,7 @@ public class Orders {
     @Enumerated(EnumType.STRING)
     private Status status = Status.APPROVING;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;
 

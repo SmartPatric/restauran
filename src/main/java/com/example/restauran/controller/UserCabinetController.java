@@ -1,9 +1,11 @@
 package com.example.restauran.controller;
 
+import com.example.restauran.converters.UsersConverter;
 import com.example.restauran.dto.UsersDTO;
 import com.example.restauran.entity.Dishes;
 import com.example.restauran.entity.Orders;
 import com.example.restauran.entity.OrdersDishes;
+import com.example.restauran.entity.Status;
 import com.example.restauran.service.DishService;
 import com.example.restauran.service.OrderService;
 import com.example.restauran.service.OrdersDishesService;
@@ -16,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,7 @@ import java.util.List;
 public class UserCabinetController {
 
     private final UsersService usersService;
+    private final UsersConverter usersConverter;
     private final OrdersDishesService ordersDishesService;
     private final DishService dishService;
     private final OrderService orderService;
@@ -53,9 +57,12 @@ public class UserCabinetController {
 
             model.addAttribute("dishes", dishes);
             model.addAttribute("orders_dishes", ordersDishes);
+            model.addAttribute("order", order);
         } else {
             model.addAttribute("dishes", null);
             model.addAttribute("orders_dishes", null);
+            model.addAttribute("order", null);
+
         }
 
         model.addAttribute("user", userAuth.getUsername());
@@ -70,17 +77,24 @@ public class UserCabinetController {
         Orders order = orderService.findOrdersByUserId(user.getId());
 
         if (order == null) {
-        }
-        OrdersDishes orderDish = new OrdersDishes(order.getId(), dishId, 1);
-        OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
-
-        //if orderDish exists increase it amount by 1
-        if (orderDishesFromExist != null) {
-            orderDish = orderDishesFromExist;
-            orderDish.increaseAmount();
+            order = new Orders();
+            order.setCreationDate(LocalDateTime.now());
+            order.setUpdateDate(LocalDateTime.now());
+            order.setUser(usersConverter.fromUserDtoToUser(user));
+            orderService.saveOrder(order);
         }
 
-        ordersDishesService.saveOrderDish(orderDish);
+        if(order.getStatus().equals(Status.APPROVING)) {
+            OrdersDishes orderDish = new OrdersDishes(order.getId(), dishId, 1);
+            OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
+
+            //if orderDish exists increase it amount by 1
+            if (orderDishesFromExist != null) {
+                orderDish = orderDishesFromExist;
+                orderDish.increaseAmount();
+            }
+            ordersDishesService.saveOrderDish(orderDish);
+        }
         return "redirect:/userCabinet";
     }
 
@@ -96,8 +110,12 @@ public class UserCabinetController {
             orderDishesFromExist.increaseAmount();
         }
         else{
-            if (orderDishesFromExist.getAmount()>0)
+            if (orderDishesFromExist.getAmount()>1)
                 orderDishesFromExist.decreaseAmount();
+            else {
+                // delete orderDish
+                ordersDishesService.deleteOrderDish(orderDishesFromExist);
+            }
         }
         ordersDishesService.saveOrderDish(orderDishesFromExist);
         return "redirect:/userCabinet";

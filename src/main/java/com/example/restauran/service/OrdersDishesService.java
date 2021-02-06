@@ -14,4 +14,5 @@ public interface OrdersDishesService {
 
     OrdersDishes saveOrderDish(OrdersDishes ordersDishes);
 
+    void deleteOrderDish(OrdersDishes ordersDishes);
 }

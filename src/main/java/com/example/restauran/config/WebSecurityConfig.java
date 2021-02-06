@@ -61,18 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login?logout")
                     .deleteCookies("JSESSIONID")
                     .permitAll();
-
     }
-
-
-/*   protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password(passwordEncoder().encode("123456")).authorities("USER")
-                .and()
-                .withUser("u").password(passwordEncoder().encode("123456")).authorities("USER")
-                .and()
-                .withUser("vvvv@gmail.com").password(passwordEncoder().encode("123456")).authorities("ADMIN");
-    }*/
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -83,52 +72,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("SELECT email AS username, password, 'true' as enabled FROM users WHERE email=?")
                 .authoritiesByUsernameQuery("SELECT email AS username, role FROM users WHERE email=?");
     }
-
-
-/*    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(customUserDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }*/
-/*
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http
-                .authorizeRequests()
-                    .antMatchers("/css/**", "/images/**",
-                        "/page/*", "/login**")
-                    .permitAll()
-                    .antMatchers("/", "/main", "/task", "/registration", "/result")
-                    .permitAll()
-                    .anyRequest().authenticated()
-                .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/")
-                    .failureUrl("/login?error")
-                    .permitAll()
-                .and()
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login?logout")
-                    .deleteCookies("my-remember-me-cookie")
-                    .permitAll()
-                .and()
-                    .rememberMe()
-                .rememberMeCookieName("my-remember-me-cookie")
-                .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(24 * 60 * 60)
-                .and().exceptionHandling();
-    }
-*/
-
-/*    PersistentTokenRepository persistentTokenRepository(){
-        JdbcTokenRepositoryImpl tokenRepositoryImp = new JdbcTokenRepositoryImpl();
-        tokenRepositoryImp.setDataSource(dataSource);
-        return tokenRepositoryImp;
-    }*/
 
 }
