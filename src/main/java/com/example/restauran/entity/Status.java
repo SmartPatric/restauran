@@ -2,6 +2,7 @@ package com.example.restauran.entity;
 
 
 public enum Status{
+    MAKING(0),
     APPROVING(1),
     COOKING(2),
     DELIVERING(3),

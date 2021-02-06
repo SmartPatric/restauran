@@ -20,7 +20,7 @@ public class Orders {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private Status status = Status.APPROVING;
+    private Status status = Status.MAKING;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

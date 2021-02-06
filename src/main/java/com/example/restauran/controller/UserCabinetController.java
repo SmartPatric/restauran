@@ -84,7 +84,8 @@ public class UserCabinetController {
             orderService.saveOrder(order);
         }
 
-        if(order.getStatus().equals(Status.APPROVING)) {
+        if (order.getStatus().equals(Status.MAKING)) {
+
             OrdersDishes orderDish = new OrdersDishes(order.getId(), dishId, 1);
             OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
 
@@ -93,31 +94,38 @@ public class UserCabinetController {
                 orderDish = orderDishesFromExist;
                 orderDish.increaseAmount();
             }
+
             ordersDishesService.saveOrderDish(orderDish);
         }
         return "redirect:/userCabinet";
     }
 
     @GetMapping(value = "/userCabinet/{type}/{dishId}")
-    public String userCabinetchangeItem(@PathVariable(value = "type") String type,
+    public String userCabinetChangeItem(@PathVariable(value = "type") String type,
                                         @PathVariable(value = "dishId") Integer dishId,
                                         @AuthenticationPrincipal User userAuth,
                                         ModelMap model) {
         UsersDTO user = usersService.findByEmail(userAuth.getUsername());
         Orders order = orderService.findOrdersByUserId(user.getId());
         OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
-        if(type.equals("incItem")){
+        if (type.equals("incItem")) {
             orderDishesFromExist.increaseAmount();
-        }
-        else{
-            if (orderDishesFromExist.getAmount()>1)
+        } else {
+            if (orderDishesFromExist.getAmount() > 1) {
                 orderDishesFromExist.decreaseAmount();
-            else {
-                // delete orderDish
-                ordersDishesService.deleteOrderDish(orderDishesFromExist);
             }
         }
         ordersDishesService.saveOrderDish(orderDishesFromExist);
         return "redirect:/userCabinet";
     }
+
+    @GetMapping(value = "/approve/{orderId}")
+    public String approveOrder(@PathVariable(value = "orderId") Integer orderId,
+                               ModelMap model) {
+        Orders order = orderService.findById(orderId);
+        order.setStatus(Status.APPROVING);
+        orderService.saveOrder(order);
+        return "redirect:/userCabinet";
+    }
+
 }

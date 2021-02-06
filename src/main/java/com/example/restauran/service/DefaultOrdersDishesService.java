@@ -32,8 +32,8 @@ public class DefaultOrdersDishesService implements OrdersDishesService {
     public OrdersDishes findOrderDishesByOrderAndDishId(Integer orderId, Integer dishId) {
         List<OrdersDishes> ordersDishesListByOrder = findOrderDishesByOrder_id(orderId);
         if(ordersDishesListByOrder!=null) {
-            for (OrdersDishes orderdish : ordersDishesListByOrder) {
-                if (orderdish.getDish_id() == dishId) return orderdish;
+            for (OrdersDishes orderDish : ordersDishesListByOrder) {
+                if (orderDish.getDish_id() == dishId) return orderDish;
             }
         }
         return null;
