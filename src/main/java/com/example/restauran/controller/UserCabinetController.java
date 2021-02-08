@@ -128,4 +128,12 @@ public class UserCabinetController {
         return "redirect:/userCabinet";
     }
 
+    @GetMapping(value = "/remove/{orderId}/{dishId}")
+    public String removeOrderDish(@PathVariable(value = "orderId") Integer orderId,
+                                  @PathVariable(value = "dishId") Integer dishId,
+                               ModelMap model) {
+        OrdersDishes orderDish = ordersDishesService.findOrderDishesByOrderAndDishId(orderId, dishId);
+        ordersDishesService.deleteOrderDish(orderDish);
+        return "redirect:/userCabinet";
+    }
 }

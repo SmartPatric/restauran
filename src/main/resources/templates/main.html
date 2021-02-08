@@ -13,8 +13,8 @@
 <h1 th:text="#{restaurant}"></h1>
 <div class="navigation">
     <div class="reg">
-        <a sec:authorize="!isAuthenticated()" href="/registration"><p th:text="#{titleReg}"></p></a>
-        <a sec:authorize="!isAuthenticated()" href="/login"><p th:text="#{logIn}"></p></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/registration}" th:text="#{titleReg}"></a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}" th:text="#{logIn}"></a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{logout}"></a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminPage}" th:text="#{page.admin}"></a>
         <a sec:authorize="hasAuthority('USER')" th:href="@{/userCabinet}" th:text="#{cabinet}"></a>
@@ -26,9 +26,9 @@
 </div>
 
 <div class="sort">
-    <p>Sort:
-    <a th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}}">by price</a>,
-    <a th:href="@{'/page/'+${currentPage}+ '?sortField=name&sortDir='+${reverseSortDir}}"> by name </a>
+    <p> <span th:text="#{sort} +': '"></span>
+    <a th:text="#{sort.byPrice}" th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}}"></a>,
+    <a th:text="#{sort.byName}" th:href="@{'/page/'+${currentPage}+ '?sortField=name&sortDir='+${reverseSortDir}}"></a>
     </p>
 </div>
 
