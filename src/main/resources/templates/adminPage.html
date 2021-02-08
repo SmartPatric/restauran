@@ -10,7 +10,7 @@
     <title th:text="#{page.admin}"></title>
 </head>
 <body>
-<h2>Welcome admin</h2>
+<h2 th:text="#{welcome}+', '+#{admin}"></h2>
 <div class="navigation">
     <div class="reg">
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{logout}"></a>
@@ -26,11 +26,11 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Status</th>
-            <th>Creation</th>
-            <th>Last Update</th>
-            <th>Dishes</th>
-            <th>Update</th>
+            <th th:text="#{order.status}"></th>
+            <th th:text="#{order.creation}"></th>
+            <th th:text="#{order.update}"></th>
+            <th th:text="#{order.dishes}"></th>
+            <th th:text="#{order.status.update}"></th>
         </tr>
         </thead>
         <tbody>
@@ -50,8 +50,8 @@
                 </p>
             </td>
             <td>
-                <a th:if="${order.status.id < 4}" th:href="@{/adminPage/next/{orderId}(orderId=${order.id})}">Next stage</a>
-                <a th:if="${order.status.id < 4}" th:href="@{/adminPage/cancel/{orderId}(orderId=${order.id})}">Cancel</a>
+                <a th:if="${order.status.id < 4}" th:href="@{/adminPage/next/{orderId}(orderId=${order.id})}" th:text="#{status.next}"></a>
+                <a th:if="${order.status.id < 4}" th:href="@{/adminPage/cancel/{orderId}(orderId=${order.id})}" th:text="#{status.cancel}"></a>
             </td>
         </tr>
         </tbody>
