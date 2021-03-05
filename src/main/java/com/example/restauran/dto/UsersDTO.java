@@ -17,12 +17,11 @@ public class UsersDTO {
 
     private Integer id;
 
-    @Email
-    @Size(min = 6, max = 45, message = "Length 6-45")
+    @Size(min = 1, max = 45, message = "Length 1-45")
     @NotBlank(message = "Enter email")
     private String email;
 
-    @Size(min = 6, max = 60, message = "Length 6-45")
+    @Size(min = 1, max = 60, message = "Length 1-45")
     @NotBlank(message = "Enter password")
     private String password;
 

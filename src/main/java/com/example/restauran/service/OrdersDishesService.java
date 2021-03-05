@@ -15,4 +15,10 @@ public interface OrdersDishesService {
     OrdersDishes saveOrderDish(OrdersDishes ordersDishes);
 
     void deleteOrderDish(OrdersDishes ordersDishes);
+
+    void changeAmount(Integer orderId, Integer dishId, String type);
+
+    OrdersDishes addOrderDishToOrder(Integer orderId, Integer dishId);
+
+
 }

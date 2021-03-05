@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta content="text/html; charset=UTF-8"/>
-    <title>Registrayion</title>
+    <title>Registration</title>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
     <link href="../static/css/reg.css" th:href="@{/css/reg.css}" rel="stylesheet"/>
 </head>
@@ -26,7 +26,7 @@
         </div>
         <div th:text="${message}"></div>
         <label th:text="#{email}" for="email"></label><br>
-        <input type="email"
+        <input type="text"
                required
                id="email"
                th:field="*{email}"
@@ -36,7 +36,6 @@
         <input type="password"
                id="pass"
                required
-               pattern="[a-zA-Zа-яА-Я_\d]{6,45}"
                th:field="*{password}"
                th:attr="placeholder = #{password.placeholder}"/>
         <input class="sbm-btn" type="submit" th:attr="value = #{submit}"/>

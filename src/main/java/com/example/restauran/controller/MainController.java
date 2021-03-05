@@ -16,14 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-
 @Controller
 @AllArgsConstructor
 @RequestMapping
 public class MainController {
 
     private final DishService dishService;
-    private final UsersService usersService;
     private final OrderService orderService;
 
 

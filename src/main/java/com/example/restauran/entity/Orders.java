@@ -32,6 +32,9 @@ public class Orders {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
+    @Column(name = "total")
+    private Double total;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "orders_dishes",
             joinColumns = @JoinColumn(name="order_id", referencedColumnName = "id"),

@@ -27,8 +27,12 @@ public class RegistrationController {
         return "registration";
     }
 
-    @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public void setDependencyB(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @PostMapping(value = "/registration")
     public String registrationSubmit(@ModelAttribute @Valid Users user, ModelMap model) {

@@ -3,7 +3,6 @@ package com.example.restauran.controller;
 
 import com.example.restauran.dto.OrderDTO;
 import com.example.restauran.entity.Orders;
-import com.example.restauran.entity.Status;
 import com.example.restauran.service.DishService;
 import com.example.restauran.service.OrderService;
 import com.example.restauran.service.OrdersDishesService;
@@ -16,29 +15,21 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class AdminPageController {
-    /*    TODO
-    Block user by his order
-    */
 
-    @Autowired
     private final OrderService orderService;
-
-    @Autowired
     private final DishService dishService;
-
-    @Autowired
     private final OrdersDishesService ordersDishesService;
+
 
     @GetMapping(value = "/adminPage")
     public String adminPage(ModelMap model) {
         List<OrderDTO> orders = orderService.findAll();
-        model.put("orders", orderService.findAll());
+        model.put("orders", orders);
         model.put("orders_dishes", ordersDishesService.findAllDishes());
         model.put("dishes", dishService.findAll());
         return "adminPage";
@@ -51,18 +42,7 @@ public class AdminPageController {
                                         @AuthenticationPrincipal User userAuth,
                                         ModelMap model) {
         Orders order = orderService.findById(orderId);
-        if(type.equals("cancel")){
-            order.setStatus(Status.CANCELED);
-        }
-        else{
-            Integer currentStatusId = order.getStatus().getId();
-            Integer nextStatus = currentStatusId+1;
-            if(nextStatus<5){
-                order.setStatus(Status.findStatusById(nextStatus));
-            }
-        }
-        order.setUpdateDate(LocalDateTime.now());
-        orderService.saveOrder(order);
+        orderService.nextStatus(type, order);
         return "redirect:/adminPage";
     }
 }

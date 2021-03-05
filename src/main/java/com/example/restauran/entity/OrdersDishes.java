@@ -23,6 +23,9 @@ public class OrdersDishes {
     @Column(name = "amount")
     private Integer amount = 1;
 
+    @Column(name = "total_dish")
+    private Double totalDish;
+
 
     public void increaseAmount() {
         this.amount++;

@@ -16,7 +16,7 @@ p{
 
 .dish-ordered{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     background-color: #82C3C0;
     margin: 20px 40px;
     border-radius: 20px;

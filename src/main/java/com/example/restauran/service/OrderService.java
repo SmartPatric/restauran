@@ -2,6 +2,7 @@ package com.example.restauran.service;
 
 import com.example.restauran.dto.OrderDTO;
 import com.example.restauran.entity.Orders;
+import com.example.restauran.entity.Users;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ public interface OrderService {
 
     List<OrderDTO> findAll();
 
+    void nextStatus(String type, Orders order);
+
+    Orders createNewOrder(Users u);
 }

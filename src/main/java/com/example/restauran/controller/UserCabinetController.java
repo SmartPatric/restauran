@@ -32,18 +32,11 @@ public class UserCabinetController {
     private final DishService dishService;
     private final OrderService orderService;
 
-/*    TODO
-    Clean all dishes
-    Clean one dish
-    */
-
-
     @GetMapping(value = "/userCabinet")
     public String userCabinet(@AuthenticationPrincipal User userAuth, ModelMap model) {
 
         UsersDTO user = usersService.findByEmail(userAuth.getUsername());
         Orders order = orderService.findOrdersByUserId(user.getId());
-
         if (order != null) {
             List<OrdersDishes> ordersDishes = ordersDishesService.findOrderDishesByOrder_id(order.getId());
 
@@ -54,14 +47,15 @@ public class UserCabinetController {
                     dishes.add(dish);
                 }
             }
-
             model.addAttribute("dishes", dishes);
             model.addAttribute("orders_dishes", ordersDishes);
             model.addAttribute("order", order);
+
         } else {
             model.addAttribute("dishes", null);
             model.addAttribute("orders_dishes", null);
             model.addAttribute("order", null);
+            model.addAttribute("mes", "nothing");
 
         }
 
@@ -75,27 +69,12 @@ public class UserCabinetController {
                                       ModelMap model) {
         UsersDTO user = usersService.findByEmail(userAuth.getUsername());
         Orders order = orderService.findOrdersByUserId(user.getId());
-
         if (order == null) {
-            order = new Orders();
-            order.setCreationDate(LocalDateTime.now());
-            order.setUpdateDate(LocalDateTime.now());
-            order.setUser(usersConverter.fromUserDtoToUser(user));
-            orderService.saveOrder(order);
+            order = orderService.createNewOrder(usersConverter.fromUserDtoToUser(user));
         }
 
         if (order.getStatus().equals(Status.MAKING)) {
-
-            OrdersDishes orderDish = new OrdersDishes(order.getId(), dishId, 1);
-            OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
-
-            //if orderDish exists increase it amount by 1
-            if (orderDishesFromExist != null) {
-                orderDish = orderDishesFromExist;
-                orderDish.increaseAmount();
-            }
-
-            ordersDishesService.saveOrderDish(orderDish);
+            ordersDishesService.addOrderDishToOrder(order.getId(), dishId);
         }
         return "redirect:/userCabinet";
     }
@@ -107,15 +86,7 @@ public class UserCabinetController {
                                         ModelMap model) {
         UsersDTO user = usersService.findByEmail(userAuth.getUsername());
         Orders order = orderService.findOrdersByUserId(user.getId());
-        OrdersDishes orderDishesFromExist = ordersDishesService.findOrderDishesByOrderAndDishId(order.getId(), dishId);
-        if (type.equals("incItem")) {
-            orderDishesFromExist.increaseAmount();
-        } else {
-            if (orderDishesFromExist.getAmount() > 1) {
-                orderDishesFromExist.decreaseAmount();
-            }
-        }
-        ordersDishesService.saveOrderDish(orderDishesFromExist);
+        ordersDishesService.changeAmount(order.getId(), dishId, type);
         return "redirect:/userCabinet";
     }
 

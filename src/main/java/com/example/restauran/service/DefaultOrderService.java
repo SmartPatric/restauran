@@ -4,11 +4,12 @@ import com.example.restauran.converters.OrdersConverter;
 import com.example.restauran.dto.OrderDTO;
 import com.example.restauran.entity.Orders;
 import com.example.restauran.entity.Status;
-import com.example.restauran.error.ValidationException;
+import com.example.restauran.entity.Users;
 import com.example.restauran.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,32 @@ public class DefaultOrderService implements OrderService{
                 .stream()
                 .map(ordersConverter::fromOrderToOrderDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void nextStatus(String type, Orders order) {
+        if(type.equals("cancel")){
+            order.setStatus(Status.CANCELED);
+        }
+        else{
+            Integer currentStatusId = order.getStatus().getId();
+            Integer nextStatus = currentStatusId+1;
+            if(nextStatus<5){
+                order.setStatus(Status.findStatusById(nextStatus));
+            }
+        }
+        order.setUpdateDate(LocalDateTime.now());
+        saveOrder(order);
+    }
+
+    @Override
+    public Orders createNewOrder(Users u) {
+        Orders order = new Orders();
+        order.setCreationDate(LocalDateTime.now());
+        order.setUpdateDate(LocalDateTime.now());
+        order.setUser(u);
+        order = saveOrder(order);
+        return order;
     }
 
 
